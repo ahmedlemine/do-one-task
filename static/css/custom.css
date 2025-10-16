@@ -1,0 +1,13 @@
+.navbar .nav-link img {
+    vertical-align: middle;
+}
+/* for task list */
+.list-group-item i {
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
+.list-group-item .task-title {
+  margin-right: 1rem;
+  overflow-wrap: anywhere;
+}

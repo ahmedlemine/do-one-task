@@ -1,6 +1,6 @@
 {% load static %}
 {% load i18n %}
-
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,51 +11,36 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap-icons/font/bootstrap-icons.min.css' %}">
     <link rel="stylesheet" href="{% static 'js/prismjs/themes/prism-okaidia.css' %}">
 
-    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <title>Do1Task{% block title %}{% endblock %}</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="{% url 'tasks:home' %}">Do1Task</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarColor01">
+                <!-- Left-aligned items -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Home
+                        <a class="nav-link active" href="{% url 'tasks:home' %}">How it works
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
+
                     <!-- Theme setting menu -->
                     <li class="nav-item dropdown" data-bs-theme="light">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="theme-menu"
                             aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static"
                             aria-label="Toggle theme">
                             <i class="bi bi-circle-half"></i>
-                            <span class="d-lg-none ms-2">Toggle theme</span>
+                            <span class="d-lg-none ms-2">Theme</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
@@ -72,17 +57,43 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- End theme setting menu -->
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="search" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
+
+                <!-- Right aligned user menu/avatar -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="{% url 'tasks:create_task' %}" class="btn btn-sm btn-primary">New Task</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle p-0" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            <img src="{% static 'img/generic_avatar.jpg' %}" alt="User Avatar" class="rounded-circle"
+                                width="32" height="32">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="{% url 'tasks:my_tasks' %}">Manage Tasks</a>
+                            <a class="dropdown-item" href="{% url 'tasks:my_stats' %}">My stats</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Account</a>
+                            <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </div>
 
+    {% block extra_body %}{% endblock extra_body %}
+
+    {% block script %}{% endblock script %}
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/prismjs/prism.js' %}" data-manual></script>
     <script>
@@ -108,9 +119,3 @@
 </body>
 
 </html>
-{% block content %}
-{% endblock content %}
-
-{% block extra_body %}{% endblock extra_body %}
-
-{% block script %}{% endblock script %}

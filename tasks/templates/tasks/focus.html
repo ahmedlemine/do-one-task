@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card border-secondary mt-5 mb-3 text-center" style="border-width: 2px;">
+    <div class="card-body">
+        {% if focus_task %}
+        <p class="card-title mb-3">Currently working on:</p>
+        <h2 class="card-text mb-4">{{ focus_task.title }}</h2>
+        <form method="POST" action="{% url 'tasks:mark_completed' focus_task.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-dark">Done</button>
+        </form>
+        {% else %}
+        <p class="mt-5">No task selected. Please <a href="{% url 'tasks:select_task' %}">select a task</a> to focus on
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
