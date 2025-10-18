@@ -2,24 +2,19 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="container">
-
-  <div class="row mt-4">
-      <div class="col-sm-12 col-md-6">
-          <div class="card border-0 shadow-sm mb-4 mb-lg-5 p-2 p-lg-0">
-              <div class="card-body p-lg-5">
-                <h4 class="text-primary">Log In</h4>
-                <div class="form-group">
-                <form class="" method="post">
-                  {% csrf_token %}
-                  {{ form|crispy }}
-                  <button class="btn bnt-lg btn-primary" type="submit">Log In</button>
-                </form>
-              </div>
-                <p><a class="text-sm" href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
-              </div>
-          </div>
+<div class="row mt-4">
+  <div class="card border-0 shadow-sm mb-4 mb-lg-5 p-2 p-lg-0">
+    <div class="card-body p-lg-5">
+      <h4 class="text-primary">Log In</h4>
+      <div class="form-group">
+        <form class="" method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button class="btn bnt-lg btn-primary" type="submit">Log In</button>
+        </form>
       </div>
+      <p><a class="text-sm" href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
+    </div>
   </div>
 </div>
 {% endblock content %}
